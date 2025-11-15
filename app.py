@@ -8,11 +8,18 @@ app = Flask(__name__)
 
 DATABASE_URL = os.environ.get("DATABASE_URL")
 
+# Fix Heroku-style URL if present
 if DATABASE_URL.startswith("postgres://"):
     DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
 
+# Database config
 app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URL
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
+# ⭐ FORCE IPv4 in psycopg2 (This is the fix)
+app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {
+    "connect_args": {"options": "-4"}
+}
 
 db = SQLAlchemy(app)
 
