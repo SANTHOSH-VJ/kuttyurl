@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tiny – Premium URL Shortener</title>
+    <title>KuttyURL – Premium URL Shortener</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://shortenter.link/assets/images/icon-url-shortener.png">
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -78,9 +81,18 @@
         }
 
         .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
             font-size: 1.35rem;
             font-weight: 700;
             color: white;
+        }
+
+        .nav-logo img {
+            width: 30px;
+            height: 30px;
+            border-radius: 6px;
         }
 
         .nav-links a {
@@ -232,7 +244,7 @@
             color: rgba(255,255,255,0.75);
         }
 
-        /* Feature Section */
+        /* Feature Card */
         .feature-card {
             background: rgba(255,255,255,0.12);
             backdrop-filter: blur(14px);
@@ -287,7 +299,11 @@
 
     <!-- Navbar -->
     <nav class="glass-nav d-flex justify-content-between align-items-center">
-        <h3 class="nav-logo">KuttyURL</h3>
+        <div class="nav-logo">
+            <img src="https://shortenter.link/assets/images/icon-url-shortener.png" alt="Logo">
+            KuttyURL
+        </div>
+
         <div class="nav-links">
             <a href="#">Home</a>
             <a href="#features">Features</a>
@@ -387,7 +403,7 @@
     </section>
 
     <!-- Floating Button -->
-    <a href="#urlForm" class="floating-cta">
+    <a href="#urlForm" id="resetBtn" class="floating-cta">
         <i class="fa-solid fa-magic me-2"></i>
         Shorten Another
     </a>
@@ -438,6 +454,14 @@
             navigator.clipboard.writeText(text);
             alert("Copied to clipboard!");
         }
+
+        document.getElementById("resetBtn").addEventListener("click", function () {
+            document.getElementById("long_url").value = "";
+            document.getElementById("alias").value = "";
+            document.getElementById("resultContainer").style.display = "none";
+
+            document.getElementById("urlForm").scrollIntoView({ behavior: "smooth" });
+        });
     </script>
 
 </body>
